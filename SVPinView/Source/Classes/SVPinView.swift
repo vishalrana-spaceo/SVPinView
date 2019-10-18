@@ -33,7 +33,7 @@ public class SVPinView: UIView {
     // MARK: - Public Properties -
     @IBInspectable public var pinLength:Int = 5
     @IBInspectable public var secureCharacter:String = "\u{25CF}"
-    @IBInspectable public var interSpace:CGFloat = 5
+    @IBInspectable public var interSpace:CGFloat = 30
     @IBInspectable public var textColor:UIColor = UIColor.black
     @IBInspectable public var shouldSecureText:Bool = true
     @IBInspectable public var allowsWhitespaces:Bool = true
@@ -90,6 +90,7 @@ public class SVPinView: UIView {
         self.addSubview(view)
         view.frame = bounds
         view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        interSpace = 30
     }
     
     // MARK: - Private methods -
@@ -329,7 +330,8 @@ extension SVPinView : UICollectionViewDataSource, UICollectionViewDelegate, UICo
         }
         let width = (collectionView.bounds.width - (interSpace * CGFloat(max(pinLength, 1) - 1)))/CGFloat(pinLength)
         let height = collectionView.frame.height
-        return CGSize(width: min(width, height), height: min(width, height))
+//        return CGSize(width: min(width, height), height: min(width, height))
+        return CGSize(width: width, height: min(width, height))
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -349,7 +351,7 @@ extension SVPinView : UICollectionViewDataSource, UICollectionViewDelegate, UICo
             let totalCellWidth = height * CGFloat(pinLength)
             let totalSpacingWidth = interSpace * CGFloat(max(pinLength, 1) - 1)
             let inset = (collectionView.frame.size.width - CGFloat(totalCellWidth + CGFloat(totalSpacingWidth))) / 2
-            return UIEdgeInsets(top: top, left: inset, bottom: 0, right: inset)
+//            return UIEdgeInsets(top: top, left: inset, bottom: 0, right: inset)
         }
         return UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
     }
